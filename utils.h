@@ -13,11 +13,11 @@
 #define TURN_RIGHT_BUTTON      132
 
 //outputs
-#define HEADLIGHTS          7
-#define BLINKER_LEFT        13
-#define BLINKER_RIGHT       15
-#define BREAKLIGHT          19
-#define STROBELIGHT         1
+#define HEADLIGHTS          65
+#define BLINKER_LEFT        67
+#define BLINKER_RIGHT       71
+#define BREAKLIGHT          101
+#define STROBELIGHT         55
 
 //CAN addresses
 #define DRIVE_FRAME_ID      0x501
@@ -104,7 +104,7 @@ void update_drive_frame(driveState &drive) {
   drive.driveFrame.id = DRIVE_FRAME_ID;
   drive.driveFrame.length = 8;
   drive.driveFrame.data.high = drive.pedal;
-  dirve.driveFrame.data.low = VELOCITY_MAX;
+  drive.driveFrame.data.low = VELOCITY_MAX;
 };
 
 void update_power_frame(driveState &drive) {
