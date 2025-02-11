@@ -37,6 +37,8 @@ void setup() {
   Can0.setGeneralCallback(handelMessageCAN); //receive CAN callback
 
   pinInit();
+
+  Serial.begin(9600);
 }
 
 void loop() {

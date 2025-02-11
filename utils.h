@@ -1,12 +1,12 @@
 #include <Arduino.h>
 #include "due_can.h"
 
-#define ACC_PEDAL_MIN 0
-#define ACC_PEDAL_MAX 1023
+#define ACC_PEDAL_MIN 510
+#define ACC_PEDAL_MAX 950
 #define VELOCITY_MAX  9000
 
 //inputs
-#define ACC_PEDAL              85
+#define ACC_PEDAL              A0
 #define BREAK_PEDAL            84
 #define DRIVE_DIRECTION_SWITCH 21  //High for reverse, Low for forward
 #define TURN_LEFT_BUTTON       20
@@ -28,7 +28,7 @@ struct driveState {
     CAN_FRAME powerFrame; //contains the current status of the power frame that is sent to the motor controller
     uint32_t busCurrent = 1.0;  //drawn current from the power bus according to current limit
     
-    uint32_t pedal;       //floating point value between 0 and 1
+    float pedal;       //floating point value between 0 and 1
     bool reversed;        //true -> driving in reverse; false -> driving forward
     bool BPSfault;        //true -> fault
     bool blink_left;      //true -> flash left blinker
@@ -69,11 +69,20 @@ void update_drive_pedal(driveState &drive){
     int max = ACC_PEDAL_MAX;
     int min = ACC_PEDAL_MIN;
 
-    uint32_t pedalValue = analogRead(ACC_PEDAL);
+    float pedalValue = analogRead(ACC_PEDAL);
+    //Serial.println(pedalValue);   //DEBUG
 
     //scale down to between 0 and 1
     pedalValue -= min;
-    pedalValue /= max;
+    pedalValue /= max-min;
+
+    Serial.print(analogRead(ACC_PEDAL));
+    Serial.print(" | ");
+    Serial.println(1-pedalValue);
+
+    if(pedalValue < 0){
+      pedalValue = 0;
+    }
 
     //check for reverse
     if(drive.reversed){
@@ -81,7 +90,7 @@ void update_drive_pedal(driveState &drive){
     }
 
     //update pedal value
-    drive.pedal = pedalValue;
+    drive.pedal = 1-pedalValue;
     return;
 };
 
