@@ -5,9 +5,9 @@
 *////////////////////////////////////////
 
 #include <Arduino.h>
-#include "due_can.h"
+#include <due_can.h>
 #include <DueTimer.h>
-#include "utils.h"
+#include "src/utils.h"
 
 //this will hold all the data relevent to the status of the car
 driveState drive;
