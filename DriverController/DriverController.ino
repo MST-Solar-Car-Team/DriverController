@@ -5,7 +5,7 @@
 *////////////////////////////////////////
 
 #include <Arduino.h>
-#include <due_can.h>
+#include "due_can.h"
 #include <DueTimer.h>
 #include "utils.h"
 
