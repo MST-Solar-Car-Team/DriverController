@@ -1,0 +1,18 @@
+#include <Arduino.h>
+#include "../states.h"
+#include "../pins.h"
+#include <DueTimer.h>
+
+#pragma once
+
+// DESC:     updates the blinker states in the drive struct
+void update_drive_blinkers(driveState &drive);
+
+void handelBlinkerLeft();
+
+void handelBlinkerRight();
+
+DueTimer blinkLeftTimer = Timer.getAvailable().attachInterrupt(handelBlinkerLeft).setFrequency(2);
+DueTimer blinkRightTimer = Timer.getAvailable().attachInterrupt(handelBlinkerRight).setFrequency(2);
+
+void flashBlinkers(driveState &drive);
