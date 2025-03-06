@@ -6,7 +6,7 @@
 //INPUT:    pass by reference the drive object
 //OUT:      the pedal member of drive will be written to,
 //          the reversed member of drive will be read from
-void update_drive_pedal(driveState &drive){
+void update_drive_pedal(){
 
     int max = ACC_PEDAL_MAX;
     int min = ACC_PEDAL_MIN;

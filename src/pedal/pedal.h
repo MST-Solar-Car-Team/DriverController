@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "due_can.h"
-#include "../states.h"
-#include "../pins.h"
+#include "../states/states.h"
+#include "../pins/pins.h"
 
 #pragma once
 
@@ -14,4 +14,4 @@
 //INPUT:    pass by reference the drive object
 //OUT:      the pedal member of drive will be written to,
 //          the reversed member of drive will be read from
-void update_drive_pedal(driveState &drive);
+void update_drive_pedal();

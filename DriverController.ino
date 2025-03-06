@@ -9,7 +9,7 @@
 #include <DueTimer.h>
 #include "src/pedal/pedal.h"
 #include "src/can/can.h"
-#include "src/pins.h"
+#include "src/pins/pins.h"
 
 
 
@@ -36,9 +36,9 @@ void setup() {
 void loop() {
 
   //update statuses
-  update_drive_pedal(drive);
+  update_drive_pedal();
   // update_drive_blinkers(drive);
-  update_drive_frame(drive);
+  update_drive_frame();
 
   // flashBlinkers(drive);
   

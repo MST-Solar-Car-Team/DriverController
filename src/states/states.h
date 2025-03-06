@@ -23,6 +23,4 @@ struct blinkerState
     bool blink_right; // current state of the right blinker
 };
 
-// this will hold all the data relevent to the status of the car
-blinkerState blinkers;
-driveState drive;
+extern driveState drive;

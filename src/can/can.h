@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "../states.h"
+#include "../states/states.h"
 
 #pragma once
 
@@ -10,9 +10,9 @@
 
 void handelMessageCAN(CAN_FRAME *frame);
 
-void update_drive_frame(driveState &drive);
+void update_drive_frame();
 
-void update_power_frame(driveState &drive);
+void update_power_frame();
 
 void sendDriveMessage();
 
