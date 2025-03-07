@@ -4,7 +4,8 @@
 
 /////   PIN DEFINITIONS
 //inputs
-#define ACC_PEDAL              A0
+#define ACC_PEDAL              A7
+#define ACC_BASELINE           A6
 #define BREAK_PEDAL            84
 #define DRIVE_DIRECTION_SWITCH 21  //High for reverse, Low for forward
 #define TURN_LEFT_BUTTON       20

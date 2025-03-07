@@ -5,13 +5,12 @@
 
 #pragma once
 
-//Variables
-#define ACC_PEDAL_MIN 510
-#define ACC_PEDAL_MAX 950
-#define VELOCITY_MAX  9000
+// Variables
+#define ACC_PEDAL_MIN 600
+#define VELOCITY_MAX 100 // 9000
 
-//DESC:     updates the pedal value in the drive object
-//INPUT:    pass by reference the drive object
-//OUT:      the pedal member of drive will be written to,
-//          the reversed member of drive will be read from
+// DESC:     updates the pedal value in the drive object
+// INPUT:    pass by reference the drive object
+// OUT:      the pedal member of drive will be written to,
+//           the reversed member of drive will be read from
 void update_drive_pedal();

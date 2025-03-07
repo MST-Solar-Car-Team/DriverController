@@ -8,7 +8,7 @@
 //          the reversed member of drive will be read from
 void update_drive_pedal(){
 
-    int max = ACC_PEDAL_MAX;
+    int max = analogRead(ACC_BASELINE) * 0.9;
     int min = ACC_PEDAL_MIN;
 
     float pedalValue = analogRead(ACC_PEDAL);
@@ -20,19 +20,17 @@ void update_drive_pedal(){
 
     Serial.print(analogRead(ACC_PEDAL));
     Serial.print(" | ");
-    Serial.println(1-pedalValue);
+    Serial.print(analogRead(ACC_BASELINE));
+    Serial.print(" | ");
+  
 
-    if(pedalValue < 0){
-      pedalValue = 0;
-    }
+    pedalValue = 1 - pedalValue;
+    pedalValue = constrain(pedalValue, 0, 1);
 
-    //check for reverse
-    if(drive.reversed){
-      pedalValue *= -1;
-    }
+    Serial.println(pedalValue);
 
     //update pedal value
-    drive.pedal = 1-pedalValue;
+    drive.pedal = pedalValue;
     return;
 };
 
