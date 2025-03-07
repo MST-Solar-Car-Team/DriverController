@@ -8,7 +8,7 @@
 //          the reversed member of drive will be read from
 void update_drive_pedal(){
 
-    int max = analogRead(ACC_BASELINE) * 0.9;
+    int max = 1023;//analogRead(ACC_BASELINE) * 0.9;
     int min = ACC_PEDAL_MIN;
 
     float pedalValue = analogRead(ACC_PEDAL);

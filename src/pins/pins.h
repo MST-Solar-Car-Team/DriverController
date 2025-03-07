@@ -8,8 +8,9 @@
 #define ACC_BASELINE           A6
 #define BREAK_PEDAL            84
 #define DRIVE_DIRECTION_SWITCH 21  //High for reverse, Low for forward
-#define TURN_LEFT_BUTTON       20
+#define TURN_LEFT_BUTTON       52 //20
 #define TURN_RIGHT_BUTTON      132
+#define CRUISE__CONTROL_BUTTON 133 
 
 //outputs
 #define HEADLIGHTS          65
@@ -19,3 +20,5 @@
 #define STROBELIGHT         55
 
 void pinInit();
+
+void readButtons();

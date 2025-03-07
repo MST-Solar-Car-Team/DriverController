@@ -7,7 +7,7 @@
 
 // Variables
 #define ACC_PEDAL_MIN 600
-#define VELOCITY_MAX 100 // 9000
+//#define VELOCITY_MAX 3000 // 9000
 
 // DESC:     updates the pedal value in the drive object
 // INPUT:    pass by reference the drive object

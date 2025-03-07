@@ -40,12 +40,11 @@ void loop() {
   // update_drive_blinkers(drive);
   update_drive_frame();
 
+  readButtons();
+  Serial.println(drive.driveFrame.data.high);
+  // Serial.println(buttons.left_blinker);
+
   // flashBlinkers(drive);
   
 }
 
-//INTERRUPT SERVICE ROUTINES/////////////////////////
-//void handelMessageCAN(CAN_FRAME *frame){
-//
-//  return;
-//}

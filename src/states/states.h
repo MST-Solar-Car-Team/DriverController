@@ -9,18 +9,18 @@ struct driveState
     CAN_FRAME powerFrame;      // contains the current status of the power frame that is sent to the motor controller
     uint32_t busCurrent = 1.0; // drawn current from the power bus according to current limit
 
-    float pedal;      // floating point value between 0 and 1
-    bool reversed;    // true -> driving in reverse; false -> driving forward
-    bool BPSfault;    // true -> fault
-    bool blink_left;  // true -> flash left blinker
-    bool blink_right; // true -> flash right blinker
-    bool breaking;    // true -> break pedal applied, turn on break lights
+    float pedal;   // floating point value between 0 and 1
+    bool reversed; // true -> driving in reverse; false -> driving forward
+    bool BPSfault; // true -> fault
+    bool breaking; // true -> break pedal applied, turn on break lights
 };
 
-struct blinkerState
+struct buttonStates
 {
-    bool blink_left;  // current state of the left blinker
-    bool blink_right; // current state of the right blinker
+    int left_blinker;  // true -> flash left blinker
+    int right_blinker; // true -> flash right blinker
+    int cruise_control; // true -> enable cruise control
 };
 
 extern driveState drive;
+extern buttonStates buttons;

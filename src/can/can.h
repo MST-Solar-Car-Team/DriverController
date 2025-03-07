@@ -6,7 +6,7 @@
 // CAN addresses
 #define DRIVE_FRAME_ID 0x501
 #define POWER_FRAME_ID 0x502
-#define VELOCITY_MAX  9000
+#define VELOCITY_MAX  3000//9000
 
 void handelMessageCAN(CAN_FRAME *frame);
 
