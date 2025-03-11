@@ -14,8 +14,10 @@ void update_drive_frame()
 {
     drive.driveFrame.id = DRIVE_FRAME_ID;
     drive.driveFrame.length = 8;
-    drive.driveFrame.data.high = drive.pedal;
-    drive.driveFrame.data.low = VELOCITY_MAX;
+    // drive.driveFrame.data.high = drive.pedal;
+    // drive.driveFrame.data.low = VELOCITY_MAX;
+    memcpy(&drive.driveFrame.data.high, &drive.pedal, sizeof(drive.pedal));
+    memcpy(&drive.driveFrame.data.low, &VELOCITY_MAX, sizeof(VELOCITY_MAX));
 };
 
 void update_power_frame()
