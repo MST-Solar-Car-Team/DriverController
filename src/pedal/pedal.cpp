@@ -27,7 +27,7 @@ void update_drive_pedal(){
     pedalValue = 1 - pedalValue;
     pedalValue = constrain(pedalValue, 0, 1) * 0.6;
 
-    // Serial.println(pedalValue);
+    Serial.println(pedalValue);
 
     //update pedal value
     drive.pedal = pedalValue;

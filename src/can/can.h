@@ -8,7 +8,7 @@
 #define POWER_FRAME_ID 0x502
 // #define VELOCITY_MAX  3000//9000
 
-const float VELOCITY_MAX = 3000;  
+const float VELOCITY_MAX = 9000;  
 
 void handelMessageCAN(CAN_FRAME *frame);
 
