@@ -11,6 +11,7 @@ struct driveState
 
     float pedal;   // floating point value between 0 and 1
     bool reversed; // true -> driving in reverse; false -> driving forward
+    bool pedalFault = false;
     bool BPSfault; // true -> fault
     bool breaking; // true -> break pedal applied, turn on break lights
 };

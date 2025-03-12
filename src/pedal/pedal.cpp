@@ -7,20 +7,30 @@
 //OUT:      the pedal member of drive will be written to,
 //          the reversed member of drive will be read from
 void update_drive_pedal(){
+    
+    int baseRaw = analogRead(ACC_BASELINE);
+    int pedalRaw = analogRead(ACC_PEDAL);
 
     int max = analogRead(ACC_BASELINE) * 0.9;
     int min = ACC_PEDAL_MIN;
 
-    float pedalValue = analogRead(ACC_PEDAL);
+    float pedalValue = pedalRaw;
+    
+    // Checks for weird values and stops the motor
+    if ((analogRead(ACC_BASELINE) < (pedalValue - 50)) || (pedalRaw < min)) {
+      Serial.println("Error: PedalFault!");
+      drive.pedalFault = true;
+      return;
+    } 
     //Serial.println(pedalValue);   //DEBUG
 
     //scale down to between 0 and 1
     pedalValue -= min;
     pedalValue /= max-min;
 
-    Serial.print(analogRead(ACC_PEDAL));
+    Serial.print(pedalRaw);
     Serial.print(" | ");
-    Serial.print(analogRead(ACC_BASELINE));
+    Serial.print(baseRaw);
     Serial.print(" | ");
   
 
