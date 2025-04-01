@@ -2,5 +2,3 @@
 
 // this will hold all the data relevent to the status of the car
 // blinkerState blinkers;
-driveState drive;
-buttonStates buttons;
