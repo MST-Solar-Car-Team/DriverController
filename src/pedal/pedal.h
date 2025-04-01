@@ -1,13 +1,13 @@
-#include <Arduino.h>
-#include "due_can.h"
-#include "../states/states.h"
 #include "../pins/pins.h"
+#include "../states/states.h"
+#include "due_can.h"
+#include <Arduino.h>
 
 #pragma once
 
 // Variables
 #define ACC_PEDAL_MIN 600
-//#define VELOCITY_MAX 3000 // 9000
+// #define VELOCITY_MAX 3000 // 9000
 
 // DESC:     updates the pedal value in the drive object
 // INPUT:    pass by reference the drive object
