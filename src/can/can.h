@@ -12,10 +12,10 @@ const float VELOCITY_MAX = 9000;
 
 void handelMessageCAN(CAN_FRAME *frame);
 
-void update_drive_frame();
+void update_drive_frame(driveState &drive);
 
-void update_power_frame();
+void update_power_frame(driveState &drive);
 
-void sendDriveMessage();
+void sendDriveMessage(driveState &drive);
 
-void sendPowerMessage();
+void sendPowerMessage(driveState &drive);

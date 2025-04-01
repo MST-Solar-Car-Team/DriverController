@@ -22,6 +22,3 @@ struct buttonStates
     int right_blinker; // true -> flash right blinker
     int cruise_control; // true -> enable cruise control
 };
-
-extern driveState drive;
-extern buttonStates buttons;

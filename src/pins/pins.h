@@ -21,4 +21,4 @@
 
 void pinInit();
 
-void readButtons();
+void readButtons(buttonStates &buttons);

@@ -15,9 +15,12 @@
 
 using namespace std;
 
+driveState drive;
+buttonStates buttons;
+
 //timer settup
-DueTimer driveTimer = Timer.getAvailable().attachInterrupt(sendDriveMessage).start(100000);
-DueTimer powerTimer = Timer.getAvailable().attachInterrupt(sendPowerMessage).start(100000);
+DueTimer driveTimer = Timer.getAvailable().attachInterrupt([]() { sendDriveMessage(drive); }).start(100000);
+DueTimer powerTimer = Timer.getAvailable().attachInterrupt([]() { sendPowerMessage(drive); }).start(100000);
 
 void setup() {
   //setup the CAN bus interface
@@ -36,11 +39,11 @@ void setup() {
 void loop() {
 
   //update statuses
-  update_drive_pedal();
+  update_drive_pedal(drive);
   // update_drive_blinkers(drive);
-  update_drive_frame();
+  update_drive_frame(drive);
 
-  readButtons();
+  readButtons(buttons);
   // Serial.println(drive.driveFrame.data.high);
   
   // Serial.println(buttons.left_blinker);

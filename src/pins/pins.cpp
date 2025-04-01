@@ -20,7 +20,7 @@ void pinInit()
     pinMode(STROBELIGHT, OUTPUT);
 };
 
-void readButtons() {
+void readButtons(buttonStates &buttons) {
     buttons.left_blinker = digitalRead(TURN_LEFT_BUTTON);
     buttons.right_blinker = digitalRead(TURN_RIGHT_BUTTON);
     buttons.cruise_control = digitalRead(CRUISE__CONTROL_BUTTON);

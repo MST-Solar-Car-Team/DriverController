@@ -10,7 +10,8 @@ void handelMessageCAN(CAN_FRAME *frame)
 };
 
 
-void update_drive_frame()
+void update_drive_frame(driveState &drive)
+
 {
     drive.driveFrame.id = DRIVE_FRAME_ID;
     drive.driveFrame.length = 8;
@@ -20,7 +21,7 @@ void update_drive_frame()
     memcpy(&drive.driveFrame.data.low, &VELOCITY_MAX, sizeof(VELOCITY_MAX));
 };
 
-void update_power_frame()
+void update_power_frame(driveState &drive)
 {
     drive.driveFrame.id = POWER_FRAME_ID;
     drive.driveFrame.length = 8;
@@ -28,14 +29,14 @@ void update_power_frame()
     drive.driveFrame.data.low = 0;
 };
 
-void sendDriveMessage()
+void sendDriveMessage(driveState &drive)
 {
   if (!drive.pedalFault){
     Can0.sendFrame(drive.driveFrame);
   }
 }
 
-void sendPowerMessage()
+void sendPowerMessage(driveState &drive)
 {
     Can0.sendFrame(drive.powerFrame);
 }

@@ -13,4 +13,4 @@
 // INPUT:    pass by reference the drive object
 // OUT:      the pedal member of drive will be written to,
 //           the reversed member of drive will be read from
-void update_drive_pedal();
+void update_drive_pedal(driveState &drive);
