@@ -1,9 +1,9 @@
 #include "pins.h"
+
 #include "../states/states.h"
 
 // Initilize pins
 void pinInit() {
-
   // set input pins
   pinMode(ACC_PEDAL, INPUT);
   pinMode(BREAK_PEDAL, INPUT);

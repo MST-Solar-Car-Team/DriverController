@@ -1,7 +1,8 @@
+#include <Arduino.h>
+
 #include "../pins/pins.h"
 #include "../states/states.h"
 #include "due_can.h"
-#include <Arduino.h>
 
 #pragma once
 

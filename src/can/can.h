@@ -1,5 +1,6 @@
-#include "../states/states.h"
 #include <Arduino.h>
+
+#include "../states/states.h"
 
 #pragma once
 

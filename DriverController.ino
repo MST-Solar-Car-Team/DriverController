@@ -5,12 +5,13 @@
  *
  *////////////////////////////////////////
 
-#include "src/can/can.h"
-#include "src/pedal/pedal.h"
-#include "src/pins/pins.h"
 #include <Arduino.h>
 #include <DueTimer.h>
 #include <due_can.h>
+
+#include "src/can/can.h"
+#include "src/pedal/pedal.h"
+#include "src/pins/pins.h"
 
 using namespace std;
 
@@ -18,21 +19,19 @@ driveState drive;
 buttonStates buttons;
 
 // timer settup
-DueTimer driveTimer = Timer.getAvailable()
-                          .attachInterrupt([]() { sendDriveMessage(drive); })
-                          .start(100000);
-DueTimer powerTimer = Timer.getAvailable()
-                          .attachInterrupt([]() { sendPowerMessage(drive); })
-                          .start(100000);
+DueTimer driveTimer =
+    Timer.getAvailable().attachInterrupt([]() { sendDriveMessage(drive); }).start(100000);
+DueTimer powerTimer =
+    Timer.getAvailable().attachInterrupt([]() { sendPowerMessage(drive); }).start(100000);
 
 void setup() {
   // setup the CAN bus interface
   Can0.begin(500000, 255);
   Can1.begin(500000, 255);
 
-  Can0.watchFor(); // allows all canbus traffic through
+  Can0.watchFor();  // allows all canbus traffic through
 
-  Can0.setGeneralCallback(handelMessageCAN); // receive CAN callback
+  Can0.setGeneralCallback(handelMessageCAN);  // receive CAN callback
 
   pinInit();
 
@@ -40,7 +39,6 @@ void setup() {
 }
 
 void loop() {
-
   // update statuses
   update_drive_pedal(drive);
   // update_drive_blinkers(drive);

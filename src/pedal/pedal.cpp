@@ -1,4 +1,5 @@
 #include "pedal.h"
+
 #include <Arduino.h>
 
 // DESC:     updates the pedal value in the drive object
@@ -6,7 +7,6 @@
 // OUT:      the pedal member of drive will be written to,
 //           the reversed member of drive will be read from
 void update_drive_pedal(driveState &drive) {
-
   int baseRaw = analogRead(ACC_BASELINE);
   int pedalRaw = analogRead(ACC_PEDAL);
 
