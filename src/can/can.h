@@ -9,7 +9,7 @@
 #define POWER_FRAME_ID 0x502
 
 const float VELOCITY_MAX = 9000;
-const uint32_t CURRENT_MAX = 1;
+const float CURRENT_MAX = 1.0;
 
 void handle_can_message(CAN_FRAME *frame);
 

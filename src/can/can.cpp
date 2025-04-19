@@ -32,7 +32,7 @@ CAN_FRAME get_power_frame() {
 
   power_frame.id = POWER_FRAME_ID;
   power_frame.length = 8;
-  power_frame.data.high = CURRENT_MAX;
+  memcpy(&power_frame.data.high, &CURRENT_MAX, sizeof(power_frame.data.high));
   power_frame.data.low = 0;
 
   return power_frame;
