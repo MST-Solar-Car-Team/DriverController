@@ -15,7 +15,7 @@ float get_pedal_value() {
 
   // Checks if the pedal value is greater than the baseline, in which the pedal is definitly
   // shorting
-  if ((analogRead(ACC_BASELINE) < (pedal_value - 50)) || (pedal_raw < min)) {
+  if ((base_raw < (pedal_value - 50)) || (pedal_raw < min)) {
     return -1;
   }
 
