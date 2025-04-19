@@ -7,16 +7,16 @@
 // CAN addresses
 #define DRIVE_FRAME_ID 0x501
 #define POWER_FRAME_ID 0x502
-// #define VELOCITY_MAX  3000//9000
 
 const float VELOCITY_MAX = 9000;
+const uint32_t CURRENT_MAX = 1;
 
-void handelMessageCAN(CAN_FRAME *frame);
+void handle_can_message(CAN_FRAME *frame);
 
-void update_drive_frame(driveState &drive);
+CAN_FRAME get_drive_frame(carState &car);
 
-void update_power_frame(driveState &drive);
+CAN_FRAME get_power_frame();
 
-void sendDriveMessage(driveState &drive);
+void send_drive_message(carState &car);
 
-void sendPowerMessage(driveState &drive);
+void send_power_message();

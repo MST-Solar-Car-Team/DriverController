@@ -1,9 +1,10 @@
 #include <Arduino.h>
 
+#include "../states/states.h"
+
 #pragma once
 
 /////   PIN DEFINITIONS
-// inputs
 #define ACC_PEDAL A7
 #define ACC_BASELINE A6
 #define BREAK_PEDAL 84

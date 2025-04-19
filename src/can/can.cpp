@@ -1,33 +1,53 @@
 #include "can.h"
 
 #include <Arduino.h>
+#include <due_can.h>
 
-#pragma once
+#include "../pedal/pedal.h"
 
-void handelMessageCAN(CAN_FRAME *frame) { return; };
+void handle_can_message(CAN_FRAME *frame) { return; }
 
-void update_drive_frame(driveState &drive)
+// returns a CAN_FRAME for activating the motor in relation to the current pedal value
+CAN_FRAME get_drive_frame(carState &car) {
+  CAN_FRAME drive_frame;
 
-{
-  drive.driveFrame.id = DRIVE_FRAME_ID;
-  drive.driveFrame.length = 8;
-  // drive.driveFrame.data.high = drive.pedal;
-  // drive.driveFrame.data.low = VELOCITY_MAX;
-  memcpy(&drive.driveFrame.data.high, &drive.pedal, sizeof(drive.pedal));
-  memcpy(&drive.driveFrame.data.low, &VELOCITY_MAX, sizeof(VELOCITY_MAX));
+  float speed = get_pedal_value();
+
+  if (speed == -1) {
+    car.pedalFault = true;
+  }
+
+  drive_frame.id = DRIVE_FRAME_ID;
+  drive_frame.length = 8;
+
+  memcpy(&drive_frame.data.high, &speed, sizeof(drive_frame.data.high));
+  memcpy(&drive_frame.data.low, &VELOCITY_MAX, sizeof(drive_frame.data.low));
+
+  return drive_frame;
 };
 
-void update_power_frame(driveState &drive) {
-  drive.driveFrame.id = POWER_FRAME_ID;
-  drive.driveFrame.length = 8;
-  drive.driveFrame.data.high = drive.busCurrent;
-  drive.driveFrame.data.low = 0;
+// retruns the power frame
+CAN_FRAME get_power_frame() {
+  CAN_FRAME power_frame;
+
+  power_frame.id = POWER_FRAME_ID;
+  power_frame.length = 8;
+  power_frame.data.high = CURRENT_MAX;
+  power_frame.data.low = 0;
+
+  return power_frame;
 };
 
-void sendDriveMessage(driveState &drive) {
-  if (!drive.pedalFault) {
-    Can0.sendFrame(drive.driveFrame);
+// fetches pedal data and sends a drive message over the CAN0 port on the due
+void send_drive_message(carState &car) {
+  if (car.has_fault()) {
+    CAN_FRAME frame = get_drive_frame(car);
+    Can0.sendFrame(frame);
   }
 }
 
-void sendPowerMessage(driveState &drive) { Can0.sendFrame(drive.powerFrame); }
+// sends a power message over the CAN0 port on the due
+void send_power_message() {
+  CAN_FRAME frame = get_power_frame();
+  Can0.sendFrame(frame);
+}
