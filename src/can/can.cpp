@@ -40,7 +40,7 @@ CAN_FRAME get_power_frame() {
 
 // fetches pedal data and sends a drive message over the CAN0 port on the due
 void send_drive_message(carState &car) {
-  if (car.has_fault()) {
+  if (!car.has_fault()) {
     CAN_FRAME frame = get_drive_frame(car);
     Can0.sendFrame(frame);
   }
