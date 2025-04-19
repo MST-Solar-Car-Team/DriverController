@@ -15,7 +15,7 @@ class carState {
   bool reversed = false;  // true -> driving in reverse; false -> driving forward
   bool pedalFault = false;
   bool BPSfault = false;  // true -> fault
-  bool breaking = false;  // true -> break pedal applied, turn on break lights
+  bool braking = false;   // true -> break pedal applied, turn on break lights
   buttonStates buttons;
   bool has_fault();
 };

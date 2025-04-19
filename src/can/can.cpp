@@ -26,7 +26,7 @@ CAN_FRAME get_drive_frame(carState &car) {
   return drive_frame;
 };
 
-// retruns the power frame
+// returns the power frame
 CAN_FRAME get_power_frame() {
   CAN_FRAME power_frame;
 
