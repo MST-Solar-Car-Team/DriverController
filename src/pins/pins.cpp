@@ -15,6 +15,12 @@ void pinInit() {
   pinMode(BRAKE_RIGHT, OUTPUT);
   pinMode(BRAKE_LEFT, OUTPUT);
   pinMode(HEADLIGHTS, OUTPUT);
+
+  pinMode(CRUISE_CONTROL, INPUT);
+  pinMode(RIGHT_TURN_SIGNAL_BUTTON, INPUT);
+  pinMode(LEFT_TURN_SIGNAL_BUTTON, INPUT);
+  pinMode(BLACK_BUTTON, INPUT);
+  pinMode(HORN_BUTTON, INPUT);
 };
 
 void readButtons(buttonStates &buttons) {

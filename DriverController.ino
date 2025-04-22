@@ -40,8 +40,6 @@ void loop() {
 
   readButtons(car_state.buttons);
 
-//  digitalWrite(HEADLIGHTS, HIGH);
-//  delay(1000);
-//  digitalWrite(HEADLIGHTS, LOW);
-//  delay(1000);
+  Serial.println(digitalRead(CRUISE_CONTROL));
+
 }
