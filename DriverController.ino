@@ -3,7 +3,7 @@
  * Missouri S&T Solar Car. This program is meant to be run on an Arduino Due
  * board and bootloaded using the Arduino IDE.
  *
-*/
+ */
 
 #include <Arduino.h>
 #include <DueTimer.h>
@@ -13,15 +13,14 @@
 #include "src/pedal/pedal.h"
 #include "src/pins/pins.h"
 
-using namespace std;
-
 carState car_state;
 
 DueTimer driveTimer =
     Timer.getAvailable().attachInterrupt([]() { send_drive_message(car_state); }).start(100000);
 DueTimer powerTimer =
     Timer.getAvailable().attachInterrupt([]() { send_power_message(); }).start(100000);
-
+DueTimer flasherTimer =
+    Timer.getAvailable().attachInterrupt([]() { car_state.toggle_flasher(); }).start(500000);
 
 void setup() {
   // setup the CAN bus interface
@@ -37,9 +36,7 @@ void setup() {
 }
 
 void loop() {
-
-  readButtons(car_state.buttons);
+  car_state.readButtons();
 
   Serial.println(digitalRead(CRUISE_CONTROL));
-
 }
