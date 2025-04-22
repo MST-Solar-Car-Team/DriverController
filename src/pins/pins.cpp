@@ -5,7 +5,8 @@
 // Initilize pins
 void pinInit() {
   // set input pins
-  pinMode(ACC_PEDAL, INPUT);
+  pinMode(A7, INPUT);  // CANNOT BE DEFINED AS A #define -- Will break shit
+  pinMode(A6, INPUT);  // CANNOT BE DEFINED AS A #define -- Will break shit
 
   pinMode(BLINKER_BACK_LEFT, OUTPUT);
   pinMode(BLINKER_BACK_RIGHT, OUTPUT);
