@@ -31,6 +31,9 @@ void carState::readButtons() {
   if (!input_left && prev_left && debounce_left == 0) {
     this->buttons.left_blinker = !this->buttons.left_blinker;
     debounce_left = DEBOUNCE_THRESHOLD;
+    if (this->buttons.left_blinker) {
+      this->flasher_state = true; // for more responsiveness
+    }
   }
   if (debounce_left > 0) debounce_left--;
   prev_left = input_left;
@@ -38,6 +41,9 @@ void carState::readButtons() {
   if (!input_right && prev_right && debounce_right == 0) {
     this->buttons.right_blinker = !this->buttons.right_blinker;
     debounce_right = DEBOUNCE_THRESHOLD;
+    if (this->buttons.right_blinker) {
+      this->flasher_state = true;
+    }
   }
   if (debounce_right > 0) debounce_right--;
   prev_right = input_right;
