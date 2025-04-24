@@ -4,6 +4,8 @@
 
 #pragma once
 
+#define DEBOUNCE_THRESHOLD 5 // how many loops to wait before registering a button press
+
 struct buttonStates {
   bool left_blinker = false;    // true -> flash left blinker
   bool right_blinker = false;   // true -> flash right blinker
