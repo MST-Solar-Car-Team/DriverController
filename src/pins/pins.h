@@ -20,6 +20,10 @@
 
 #define HEADLIGHTS 38
 
-void pinInit();
+#define CRUISE_CONTROL 7
+#define LEFT_TURN_SIGNAL_BUTTON 3
+#define RIGHT_TURN_SIGNAL_BUTTON 5
+#define HEADLIGHTS_BUTTON 6
+#define HORN_BUTTON 2
 
-void readButtons(buttonStates &buttons);
+void pinInit();
