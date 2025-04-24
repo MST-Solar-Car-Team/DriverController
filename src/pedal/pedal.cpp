@@ -8,14 +8,14 @@ float get_pedal_value() {
   int base_raw = analogRead(ACC_BASELINE);
   int pedal_raw = analogRead(ACC_PEDAL);
 
-  int max = base_raw * 0.9;  // makes a 10% dead-zone on the acceleration pedal
+  int max = base_raw * 0.95;  // makes a 10% dead-zone on the acceleration pedal
   int min = ACC_PEDAL_MIN;
 
   float pedal_value = pedal_raw;
 
   // Checks if the pedal value is greater than the baseline, in which the pedal is definitly
   // shorting
-  if ((base_raw < (pedal_value - 50)) || (pedal_raw < min)) {
+  if ((base_raw < (pedal_value - 50)) || (pedal_raw < ACC_PEDAL_FAULT)) {
     return -1;
   }
 

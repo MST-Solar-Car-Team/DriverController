@@ -37,6 +37,4 @@ void setup() {
 
 void loop() {
   car_state.readButtons();
-
-  Serial.println(digitalRead(CRUISE_CONTROL));
 }
