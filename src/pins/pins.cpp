@@ -19,4 +19,5 @@ void pinInit() {
   pinMode(LEFT_TURN_SIGNAL_BUTTON, INPUT);
   pinMode(HEADLIGHTS_BUTTON, INPUT);
   pinMode(HORN_BUTTON, INPUT);
+  pinMode(BRAKE_SWITCH, INPUT);
 };

@@ -7,7 +7,6 @@
 /////   PIN DEFINITIONS
 #define ACC_PEDAL A7
 #define ACC_BASELINE A6
-
 // outputs
 #define BLINKER_BACK_LEFT 39
 #define BLINKER_BACK_RIGHT 41
@@ -25,5 +24,6 @@
 #define RIGHT_TURN_SIGNAL_BUTTON 5
 #define HEADLIGHTS_BUTTON 6
 #define HORN_BUTTON 2
+#define BRAKE_SWITCH 9
 
 void pinInit();

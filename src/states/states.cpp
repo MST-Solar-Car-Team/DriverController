@@ -20,6 +20,7 @@ void carState::readButtons() {
   bool input_cruise = digitalRead(CRUISE_CONTROL);
   bool input_headlights = digitalRead(HEADLIGHTS_BUTTON);
   bool input_horn = digitalRead(HORN_BUTTON);
+  bool input_brake = digitalRead(BRAKE_SWITCH);
 
   // Toggle states on falling edges high->low
   if (!input_left && prev_left) {
@@ -68,5 +69,12 @@ void carState::readButtons() {
     digitalWrite(HEADLIGHTS, LOW);
   }
 
+  if (!input_brake) {
+    digitalWrite(BRAKE_LEFT, HIGH);
+    digitalWrite(BRAKE_RIGHT, HIGH);
+  } else {
+    digitalWrite(BRAKE_LEFT, LOW);
+    digitalWrite(BRAKE_RIGHT, LOW);
+  }
   // TODO: horn
 }
