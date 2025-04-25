@@ -91,9 +91,11 @@ void carState::readButtons() {
   if (!input_brake) {
     digitalWrite(BRAKE_LEFT, HIGH);
     digitalWrite(BRAKE_RIGHT, HIGH);
+    this->braking = true;
   } else {
     digitalWrite(BRAKE_LEFT, LOW);
     digitalWrite(BRAKE_RIGHT, LOW);
+    this->braking = false;
   }
   // TODO: horn
 }
