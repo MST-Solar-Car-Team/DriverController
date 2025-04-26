@@ -15,6 +15,14 @@ void carState::readButtons() {
   static bool prev_cruise = true;
   static bool prev_headlights = true;
 
+  static unsigned long last_left = 0;
+  static unsigned long last_right = 0;
+  static unsigned long last_cruise = 0;
+  static unsigned long last_headlights = 0;
+
+  const unsigned long debounce_time = DEBOUNCE_TIME; // 0.5 seconds
+  
+  
   bool input_left = digitalRead(LEFT_TURN_SIGNAL_BUTTON);
   bool input_right = digitalRead(RIGHT_TURN_SIGNAL_BUTTON);
   bool input_cruise = digitalRead(CRUISE_CONTROL);
@@ -22,24 +30,36 @@ void carState::readButtons() {
   bool input_horn = digitalRead(HORN_BUTTON);
   bool input_brake = digitalRead(BRAKE_SWITCH);
 
-  // Toggle states on falling edges high->low
-  if (!input_left && prev_left) {
+  unsigned long now = millis();
+
+  // Toggle states on falling edges high->low, with debounce
+  if (!input_left && prev_left && (now - last_left > debounce_time)) {
     this->buttons.left_blinker = !this->buttons.left_blinker;
+    last_left = now;
+    if (this->buttons.left_blinker) {
+      this->flasher_state = true; // for more responsiveness
+    }
   }
   prev_left = input_left;
 
-  if (!input_right && prev_right) {
+  if (!input_right && prev_right && (now - last_right > debounce_time)) {
     this->buttons.right_blinker = !this->buttons.right_blinker;
+    last_right = now;
+    if (this->buttons.right_blinker) {
+      this->flasher_state = true;
+    }
   }
   prev_right = input_right;
 
-  if (!input_headlights && prev_headlights) {
+  if (!input_headlights && prev_headlights && (now - last_headlights > debounce_time)) {
     this->buttons.headlights = !this->buttons.headlights;
+    last_headlights = now;
   }
   prev_headlights = input_headlights;
 
-  if (!input_cruise && prev_cruise) {
+  if (!input_cruise && prev_cruise && (now - last_cruise > debounce_time)) {
     this->buttons.cruise_control = !this->buttons.cruise_control;
+    last_cruise = now;
   }
   prev_cruise = input_cruise;
 
@@ -72,9 +92,11 @@ void carState::readButtons() {
   if (!input_brake) {
     digitalWrite(BRAKE_LEFT, HIGH);
     digitalWrite(BRAKE_RIGHT, HIGH);
+    this->braking = true;
   } else {
     digitalWrite(BRAKE_LEFT, LOW);
     digitalWrite(BRAKE_RIGHT, LOW);
+    this->braking = false;
   }
   // TODO: horn
 }

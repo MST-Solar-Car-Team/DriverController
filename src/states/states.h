@@ -4,6 +4,8 @@
 
 #pragma once
 
+#define DEBOUNCE_TIME 500 // how many milliseconds
+
 struct buttonStates {
   bool left_blinker = false;    // true -> flash left blinker
   bool right_blinker = false;   // true -> flash right blinker
