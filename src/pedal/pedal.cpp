@@ -2,6 +2,8 @@
 
 #include <Arduino.h>
 
+#include "../telemetry/serial_log.h"
+
 // Gets the current value of the cars pedal
 // return a number between 0 and 1 or -1 in the event of an error
 float get_pedal_value() {
@@ -25,6 +27,9 @@ float get_pedal_value() {
   // forces the value to fall between 0 and 1, multiplies by 0.6 to limit max acceleration.
   // This is a bandaid fix to a bigger problem, see issue #5
   pedal_value = constrain(pedal_value, 0, 1) * 0.6;
+
+  PedalPacket packet = PedalPacket(base_raw, pedal_raw);
+  packet.send_bytes();
 
   return pedal_value;
 };
