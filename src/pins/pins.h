@@ -20,10 +20,10 @@
 #define HEADLIGHTS 38
 
 #define CRUISE_CONTROL 7
-#define LEFT_TURN_SIGNAL_BUTTON 3
-#define RIGHT_TURN_SIGNAL_BUTTON 5
-#define HEADLIGHTS_BUTTON 6
-#define HORN_BUTTON 2
-#define BRAKE_SWITCH 9
+#define LEFT_TURN_SIGNAL_BUTTON 3   // Mapped to input 5
+#define RIGHT_TURN_SIGNAL_BUTTON 5  // Mapped to input 6
+#define HEADLIGHTS_BUTTON 6         // Mapped to input 7
+#define HORN_BUTTON 2               // Mapped to input 4
+#define BRAKE_SWITCH 9              // Mapped to input 3
 
 void pinInit();
