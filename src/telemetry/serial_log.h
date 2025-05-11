@@ -2,16 +2,14 @@
 
 #pragma once
 
-constexpr byte END_BYTE = 0x0A;
-
-constexpr byte PEDAL_PACKET_ID = 0x00;
+constexpr byte PEDAL_PACKET_ID = 0x13;
 constexpr byte CAN_PACKET_ID = 0x01;
 constexpr byte LIGHTS_PACKET_ID = 0x02;
 
 class PedalPacket {
  private:
-  uint16_t baseline;
-  uint16_t pedal;
+  short baseline;
+  short pedal;
 
  public:
   void send_bytes();
