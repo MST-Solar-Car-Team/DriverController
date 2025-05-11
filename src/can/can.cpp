@@ -4,9 +4,14 @@
 #include <due_can.h>
 
 #include "../pedal/pedal.h"
+#include "../telemetry/serial_log.h"
 
-void handle_can_message(CAN_FRAME *frame) { return; }
-
+void handle_can_message(CAN_FRAME *frame) { 
+  if (frame->id == 0x403) {
+    CanPacket packet = CanPacket(frame->id-0x400, frame->data.high, frame->data.low);
+    packet.send_bytes();
+  }
+}
 // returns a CAN_FRAME for activating the motor in relation to the current pedal value
 CAN_FRAME get_drive_frame(carState &car) {
   CAN_FRAME drive_frame;
