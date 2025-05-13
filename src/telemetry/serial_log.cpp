@@ -2,7 +2,7 @@
 
 char sum_bytes(unsigned char data[16]) {
   char sum = 0;
-  for (int i = 0; i < 15; i++) {
+  for (int i = 1; i < 15; i++) {
     sum = sum + data[i];
   }
   return sum;
@@ -39,5 +39,6 @@ void CanPacket::send_bytes() {
   data[8] = uint8_t(low & 0xFF);
 
   data[15] = sum_bytes(data);
+
   Serial.write(data, 16);
 }
