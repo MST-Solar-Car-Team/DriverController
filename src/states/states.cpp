@@ -1,6 +1,7 @@
 #include "states.h"
 
 #include "../pins/pins.h"
+#include "../telemetry/serial_log.h"
 
 bool carState::has_fault() { return this->BPSfault || this->pedalFault || this->braking; }
 
@@ -15,14 +16,14 @@ void carState::readButtons() {
   static bool prev_cruise = true;
   static bool prev_headlights = true;
 
+  static unsigned long last_update = 0;
   static unsigned long last_left = 0;
   static unsigned long last_right = 0;
   static unsigned long last_cruise = 0;
   static unsigned long last_headlights = 0;
 
-  const unsigned long debounce_time = DEBOUNCE_TIME; // 0.5 seconds
-  
-  
+  const unsigned long debounce_time = DEBOUNCE_TIME;  // 0.5 seconds
+
   bool input_left = digitalRead(LEFT_TURN_SIGNAL_BUTTON);
   bool input_right = digitalRead(RIGHT_TURN_SIGNAL_BUTTON);
   bool input_cruise = digitalRead(CRUISE_CONTROL);
@@ -37,7 +38,7 @@ void carState::readButtons() {
     this->buttons.left_blinker = !this->buttons.left_blinker;
     last_left = now;
     if (this->buttons.left_blinker) {
-      this->flasher_state = true; // for more responsiveness
+      this->flasher_state = true;  // for more responsiveness
     }
   }
   prev_left = input_left;
@@ -98,5 +99,14 @@ void carState::readButtons() {
     digitalWrite(BRAKE_RIGHT, LOW);
     this->braking = false;
   }
+
+  if ((now - last_update) > 100) {
+    LightsPacket packet =
+        LightsPacket(last_headlights, this->buttons.right_blinker && flasher_state,
+                     this->buttons.left_blinker && flasher_state, this->braking);
+    packet.send_bytes();
+    last_update = now;
+  }
+
   // TODO: horn
 }

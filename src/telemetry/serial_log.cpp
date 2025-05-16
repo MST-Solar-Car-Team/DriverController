@@ -24,6 +24,22 @@ void PedalPacket::send_bytes() {
   Serial.write(data, 16);
 }
 
+void LightsPacket::send_bytes() {
+  unsigned char data[16] = {0};
+
+  data[0] = LIGHTS_PACKET_ID;
+
+  data[1] = headlights;
+  data[2] = right_blinkers;
+  data[3] = left_blinkers;
+  data[4] = brake_lights;
+
+  data[15] = sum_bytes(data);
+
+  Serial.write(data, 16);
+}
+
+// Can be used to send any can related packet
 void CanPacket::send_bytes() {
   unsigned char data[16] = {0};
 

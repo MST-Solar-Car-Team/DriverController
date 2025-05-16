@@ -6,9 +6,9 @@
 #include "../pedal/pedal.h"
 #include "../telemetry/serial_log.h"
 
-void handle_can_message(CAN_FRAME *frame) { 
+void handle_can_message(CAN_FRAME *frame) {
   if (frame->id == 0x403) {
-    CanPacket packet = CanPacket(frame->id-0x400, frame->data.high, frame->data.low);
+    CanPacket packet = CanPacket(VELOCITY_PACKET_ID, frame->data.high, frame->data.low);
     packet.send_bytes();
   }
 }
