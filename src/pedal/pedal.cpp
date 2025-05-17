@@ -17,9 +17,6 @@ float get_pedal_value() {
 
   // Checks if the pedal value is greater than the baseline, in which the pedal is definitly
   // shorting
-  if ((base_raw < (pedal_value - 50)) || (pedal_raw < ACC_PEDAL_FAULT)) {
-    return -1;
-  }
 
   pedal_value -= min;
   pedal_value /= max - min;
@@ -30,6 +27,10 @@ float get_pedal_value() {
 
   PedalPacket packet = PedalPacket(base_raw, pedal_raw);
   packet.send_bytes();
+
+  if ((base_raw < (pedal_raw - 50)) || (pedal_raw < ACC_PEDAL_FAULT)) {
+    return -1;
+  }
 
   return pedal_value;
 };

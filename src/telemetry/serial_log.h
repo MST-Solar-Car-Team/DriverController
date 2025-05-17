@@ -6,6 +6,8 @@ constexpr byte CAN_PACKET_ID = 0x01;
 constexpr byte LIGHTS_PACKET_ID = 0x02;
 constexpr byte VELOCITY_PACKET_ID = 0x03;
 constexpr byte PEDAL_PACKET_ID = 0x04;
+constexpr byte MOTOR_TEMPATURE_PACKET_ID = 0x05;
+constexpr byte MOTOR_STATUS_PACKET_ID = 0x06;
 
 class PedalPacket {
  private:
