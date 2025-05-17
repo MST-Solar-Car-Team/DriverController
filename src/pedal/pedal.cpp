@@ -2,22 +2,21 @@
 
 #include <Arduino.h>
 
+#include "../telemetry/serial_log.h"
+
 // Gets the current value of the cars pedal
 // return a number between 0 and 1 or -1 in the event of an error
 float get_pedal_value() {
   int base_raw = analogRead(ACC_BASELINE);
   int pedal_raw = analogRead(ACC_PEDAL);
 
-  int max = base_raw * 0.95;  // makes a 10% dead-zone on the acceleration pedal
+  int max = base_raw * DEADZONE;
   int min = ACC_PEDAL_MIN;
 
   float pedal_value = pedal_raw;
 
   // Checks if the pedal value is greater than the baseline, in which the pedal is definitly
   // shorting
-  if ((base_raw < (pedal_value - 50)) || (pedal_raw < ACC_PEDAL_FAULT)) {
-    return -1;
-  }
 
   pedal_value -= min;
   pedal_value /= max - min;
@@ -25,6 +24,13 @@ float get_pedal_value() {
   // forces the value to fall between 0 and 1, multiplies by 0.6 to limit max acceleration.
   // This is a bandaid fix to a bigger problem, see issue #5
   pedal_value = constrain(pedal_value, 0, 1) * 0.6;
+
+  PedalPacket packet = PedalPacket(base_raw, pedal_raw);
+  packet.send_bytes();
+
+  if ((base_raw < (pedal_raw - 50)) || (pedal_raw < ACC_PEDAL_FAULT)) {
+    return -1;
+  }
 
   return pedal_value;
 };
