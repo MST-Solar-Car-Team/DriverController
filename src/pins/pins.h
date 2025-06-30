@@ -25,5 +25,6 @@
 #define HEADLIGHTS_BUTTON 6
 #define HORN_BUTTON 2
 #define BRAKE_SWITCH 9
+#define REVERSE_SWITCH 30 //find actual pin
 
 void pinInit();

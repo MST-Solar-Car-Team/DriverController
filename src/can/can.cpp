@@ -40,6 +40,8 @@ CAN_FRAME get_drive_frame(carState &car) {
     car.pedalFault = true;
   }
 
+  speed = car.reversed ? -speed : speed;
+
   drive_frame.id = DRIVE_FRAME_ID;
   drive_frame.length = 8;
 

@@ -15,12 +15,14 @@ void carState::readButtons() {
   static bool prev_right = true;
   static bool prev_cruise = true;
   static bool prev_headlights = true;
+  static bool prev_reverse = true;
 
   static unsigned long last_update = 0;
   static unsigned long last_left = 0;
   static unsigned long last_right = 0;
   static unsigned long last_cruise = 0;
   static unsigned long last_headlights = 0;
+  static unsigned long last_reverse = 0;
 
   const unsigned long debounce_time = DEBOUNCE_TIME;  // 0.5 seconds
 
@@ -30,6 +32,7 @@ void carState::readButtons() {
   bool input_headlights = digitalRead(HEADLIGHTS_BUTTON);
   bool input_horn = digitalRead(HORN_BUTTON);
   bool input_brake = digitalRead(BRAKE_SWITCH);
+  bool input_reverse = digitalRead(REVERSE_SWITCH);
 
   unsigned long now = millis();
 
@@ -66,6 +69,12 @@ void carState::readButtons() {
 
   this->buttons.horn = (input_horn == LOW);
 
+  if(!input_reverse && prev_cruise && (now-last_reverse > debounce_time)) {
+    this->buttons.reverse = !this->buttons.reverse;
+    last_reverse = now;
+  }
+  prev_reverse = input_reverse;
+
   // perform actions
 
   if (this->buttons.left_blinker && this->flasher_state) {
@@ -100,6 +109,8 @@ void carState::readButtons() {
     this->braking = false;
   }
 
+
+
   if ((now - last_update) > 100) {
     LightsPacket packet =
         LightsPacket(this->buttons.headlights, this->buttons.right_blinker && flasher_state,
@@ -109,4 +120,10 @@ void carState::readButtons() {
   }
 
   // TODO: horn
+
+
+  // TODO: add reverse telemetry
+  this->reversed = this->buttons.reverse;
+
+
 }

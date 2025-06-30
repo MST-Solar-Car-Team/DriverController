@@ -12,6 +12,7 @@ struct buttonStates {
   bool cruise_control = false;  // true -> enable cruise control
   bool headlights = false;      // true -> turn on headlights
   bool horn = false;            // true -> honk horn
+  bool reverse = false;         // true -> sets car to go in
 };
 
 class carState {
