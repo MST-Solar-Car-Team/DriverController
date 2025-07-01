@@ -33,6 +33,7 @@ void LightsPacket::send_bytes() {
   data[2] = right_blinkers;
   data[3] = left_blinkers;
   data[4] = brake_lights;
+  data[5] = reversed;
 
   data[15] = sum_bytes(data);
 

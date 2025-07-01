@@ -28,15 +28,17 @@ class LightsPacket {
   uint8_t right_blinkers;
   uint8_t left_blinkers;
   uint8_t brake_lights;
+  uint8_t reversed;
 
  public:
   void send_bytes();
   LightsPacket(uint8_t headlight, uint8_t right_blinkers, uint8_t left_blinkers,
-               uint8_t brake_lights) {
+               uint8_t brake_lights, uint8_t reversed) {
     this->headlights = headlight;
     this->right_blinkers = right_blinkers;
     this->left_blinkers = left_blinkers;
     this->brake_lights = brake_lights;
+    this->reversed = reversed;
   }
 };
 
