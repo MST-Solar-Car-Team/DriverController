@@ -69,11 +69,12 @@ void carState::readButtons() {
 
   this->buttons.horn = (input_horn == LOW);
 
-  if (!input_reverse && prev_cruise && (now - last_reverse > debounce_time)) {
-    this->buttons.reverse = !this->buttons.reverse;
-    last_reverse = now;
-  }
-  prev_reverse = input_reverse;
+  // if (!input_reverse && prev_cruise && (now - last_reverse > debounce_time)) {
+    // this->buttons.reverse = !this->buttons.reverse;
+    // last_reverse = now;
+  // }
+  // prev_reverse = input_reverse;
+  this->buttons.reverse = input_reverse;
 
   // perform actions
 
@@ -119,6 +120,5 @@ void carState::readButtons() {
 
   // TODO: horn
 
-  // TODO: add reverse telemetry
   this->reversed = this->buttons.reverse;
 }
