@@ -13,6 +13,7 @@ constexpr short MOTOR_HEAT_FRAME_ID = 0x40B;
 constexpr short MOTOR_VELOCITY_FRAME_ID = 0x403;
 
 constexpr float VELOCITY_MAX = 9000;
+constexpr float REVERSE_VELOCITY_MAX = -9000;
 constexpr float CURRENT_MAX = 1;
 
 void handle_can_message(CAN_FRAME *frame);

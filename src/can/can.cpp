@@ -40,13 +40,15 @@ CAN_FRAME get_drive_frame(carState &car) {
     car.pedalFault = true;
   }
 
-  speed = car.reversed ? -speed : speed;
-
   drive_frame.id = DRIVE_FRAME_ID;
   drive_frame.length = 8;
 
   memcpy(&drive_frame.data.high, &speed, sizeof(drive_frame.data.high));
-  memcpy(&drive_frame.data.low, &VELOCITY_MAX, sizeof(drive_frame.data.low));
+  if(!car.reversed){
+    memcpy(&drive_frame.data.low, &VELOCITY_MAX, sizeof(drive_frame.data.low));
+  }else{
+    memcpy(&drive_frame.data.low, &REVERSE_VELOCITY_MAX, sizeof(drive_frame.data.low));
+  }
 
   return drive_frame;
 };
