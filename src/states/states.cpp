@@ -106,15 +106,12 @@ void carState::readButtons() {
 
   //Hazards:
   if (this->buttons.hazards && this->flasher_state) {
-    digitalWrite(BLINKER_BACK_LEFT, HIGH);
-    digitalWrite(BLINKER_FRONT_LEFT, HIGH);
-    digitalWrite(BLINKER_BACK_RIGHT, HIGH);
-    digitalWrite(BLINKER_FRONT_RIGHT, HIGH);
+    BRAKE_LEFT
+    digitalWrite(BRAKE_LEFT, HIGH);
+    digitalWrite(BRAKE_RIGHT, HIGH);
   } else {
-    digitalWrite(BLINKER_BACK_LEFT, LOW);
-    digitalWrite(BLINKER_FRONT_LEFT, LOW);
-    digitalWrite(BLINKER_BACK_RIGHT, LOW);
-    digitalWrite(BLINKER_FRONT_RIGHT, LOW);
+    digitalWrite(BRAKE_LEFT, LOW);
+    digitalWrite(BRAKE_RIGHT, LOW);
   }
 
 
