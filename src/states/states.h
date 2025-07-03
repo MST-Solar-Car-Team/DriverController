@@ -13,6 +13,7 @@ struct buttonStates {
   bool headlights = false;      // true -> turn on headlights
   bool horn = false;            // true -> honk horn
   bool reverse = false;         // true -> sets car to go in
+  bool hazards = false;         // true -> set turn signals to flash in sync
 };
 
 class carState {

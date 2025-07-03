@@ -13,6 +13,7 @@ void pinInit() {
   pinMode(BRAKE_RIGHT, OUTPUT);
   pinMode(BRAKE_LEFT, OUTPUT);
   pinMode(HEADLIGHTS, OUTPUT);
+  pinMode(HORN_RELAY, OUTPUT);
 
   pinMode(CRUISE_CONTROL, INPUT);
   pinMode(RIGHT_TURN_SIGNAL_BUTTON, INPUT);
@@ -21,4 +22,5 @@ void pinInit() {
   pinMode(HORN_BUTTON, INPUT);
   pinMode(BRAKE_SWITCH, INPUT);
   pinMode(REVERSE_SWITCH, INPUT);
+  pinMode(HAZARDS_SWITCH, INPUT);
 };
