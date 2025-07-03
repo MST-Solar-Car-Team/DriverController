@@ -138,6 +138,10 @@ void carState::readButtons() {
     LightsPacket packet =
         LightsPacket(this->buttons.headlights, this->buttons.right_blinker && flasher_state,
                      this->buttons.left_blinker && flasher_state, this->braking, this->reversed);
+    //if hazards are on then just check the flasher_state
+    if(this->buttons.hazards){
+      LightsPacket(this->buttons.headlights, flasher_state, flasher_state, this->braking, this->reversed);
+    }
     packet.send_bytes();
     last_update = now;
   }
