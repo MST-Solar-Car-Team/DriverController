@@ -27,4 +27,7 @@
 #define BRAKE_SWITCH 7 //9
 #define REVERSE_SWITCH 11
 
+#define LEFT_INTERNAL_SIGNAL 29
+#define RIGHT_INTERNAL_SIGNAL 32
+
 void pinInit();

@@ -26,4 +26,7 @@ void pinInit() {
   pinMode(BRAKE_SWITCH, INPUT);
   // pinMode(A1, INPUT);
   pinMode(REVERSE_SWITCH, INPUT);
+
+  pinMode(RIGHT_INTERNAL_SIGNAL,OUTPUT);
+  pinMode(LEFT_INTERNAL_SIGNAL,OUTPUT);
 };

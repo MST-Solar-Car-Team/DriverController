@@ -89,17 +89,21 @@ void carState::readButtons() {
   if (this->buttons.left_blinker && this->flasher_state) {
     digitalWrite(BLINKER_BACK_LEFT, HIGH);
     digitalWrite(BLINKER_FRONT_LEFT, HIGH);
+    digitalWrite(LEFT_INTERNAL_SIGNAL, HIGH);
   } else {
     digitalWrite(BLINKER_BACK_LEFT, LOW);
     digitalWrite(BLINKER_FRONT_LEFT, LOW);
+    digitalWrite(LEFT_INTERNAL_SIGNAL, LOW);
   }
 
   if (this->buttons.right_blinker && this->flasher_state) {
     digitalWrite(BLINKER_BACK_RIGHT, HIGH);
     digitalWrite(BLINKER_FRONT_RIGHT, HIGH);
+    digitalWrite(RIGHT_INTERNAL_SIGNAL, HIGH);
   } else {
     digitalWrite(BLINKER_BACK_RIGHT, LOW);
     digitalWrite(BLINKER_FRONT_RIGHT, LOW);
+    digitalWrite(RIGHT_INTERNAL_SIGNAL, LOW);
   }
 
   if (this->buttons.headlights) {
