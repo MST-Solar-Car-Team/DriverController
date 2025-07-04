@@ -41,7 +41,6 @@ void carState::readButtons() {
   bool input_brake = analogRead(BRAKE_SWITCH) > 512;
 
   bool input_reverse = digitalRead(REVERSE_SWITCH);
-  bool input_hazards = digitalRead(HAZARDS_SWITCH);
 
   unsigned long now = millis();
 
@@ -76,7 +75,6 @@ void carState::readButtons() {
   }
   prev_cruise = input_cruise;
 
-  //TODO: double check that this is correct for the input
   this->buttons.horn = (input_horn == LOW);
 
   // if (!input_reverse && prev_cruise && (now - last_reverse > debounce_time)) {
@@ -85,13 +83,6 @@ void carState::readButtons() {
   // }
   // prev_reverse = input_reverse;
   this->buttons.reverse = input_reverse;
-
-  //Hazards:
-  this->buttons.hazards = input_hazards;
-  if(this->buttons.hazards){
-    this->flasher_state = true;    
-  }
-  
 
   // perform actions
 
@@ -110,17 +101,6 @@ void carState::readButtons() {
     digitalWrite(BLINKER_BACK_RIGHT, LOW);
     digitalWrite(BLINKER_FRONT_RIGHT, LOW);
   }
-  
-
-  //Hazards:
-  if (this->buttons.hazards && this->flasher_state) {
-    digitalWrite(BRAKE_LEFT, HIGH);
-    digitalWrite(BRAKE_RIGHT, HIGH);
-  } else {
-    digitalWrite(BRAKE_LEFT, LOW);
-    digitalWrite(BRAKE_RIGHT, LOW);
-  }
-
 
   if (this->buttons.headlights) {
     digitalWrite(HEADLIGHTS, HIGH);
@@ -151,11 +131,6 @@ void carState::readButtons() {
   }
 
   // TODO: horn
-  if(this->buttons.horn){
-    digitalWrite(HORN_RELAY,HIGH);
-  }else {
-    digitalWrite(HORN_RELAY,LOW);
-  }
 
   this->reversed = this->buttons.reverse;
 }
