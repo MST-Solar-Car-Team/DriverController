@@ -15,15 +15,15 @@ void pinInit() {
   pinMode(HEADLIGHTS, OUTPUT);
 
   pinMode(CRUISE_CONTROL, INPUT);
-  // pinMode(RIGHT_TURN_SIGNAL_BUTTON, INPUT);
-  // pinMode(LEFT_TURN_SIGNAL_BUTTON, INPUT);
-  pinMode(A1,INPUT);
-  pinMode(A2,INPUT);
+  pinMode(RIGHT_TURN_SIGNAL_BUTTON, INPUT);
+  pinMode(LEFT_TURN_SIGNAL_BUTTON, INPUT);
+  // pinMode(A1,INPUT);
+  // pinMode(A2,INPUT);
 
   pinMode(HEADLIGHTS_BUTTON, INPUT);
   
   pinMode(HORN_BUTTON, INPUT);
-  // pinMode(BRAKE_SWITCH, INPUT);
-  pinMode(A1, INPUT);
+  pinMode(BRAKE_SWITCH, INPUT);
+  // pinMode(A1, INPUT);
   pinMode(REVERSE_SWITCH, INPUT);
 };

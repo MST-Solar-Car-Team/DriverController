@@ -26,19 +26,19 @@ void carState::readButtons() {
 
   const unsigned long debounce_time = DEBOUNCE_TIME;  // 0.5 seconds
 
-  // bool input_left = digitalRead(LEFT_TURN_SIGNAL_BUTTON);
-  bool input_left = analogRead(LEFT_TURN_SIGNAL_BUTTON) > 512;
+  bool input_left = digitalRead(LEFT_TURN_SIGNAL_BUTTON);
+  // bool input_left = analogRead(LEFT_TURN_SIGNAL_BUTTON) > 512;
 
-  // bool input_right = digitalRead(RIGHT_TURN_SIGNAL_BUTTON);
-  bool input_right = analogRead(RIGHT_TURN_SIGNAL_BUTTON) > 512;
+  bool input_right = digitalRead(RIGHT_TURN_SIGNAL_BUTTON);
+  // bool input_right = analogRead(RIGHT_TURN_SIGNAL_BUTTON) > 512;
 
 
   bool input_cruise = digitalRead(CRUISE_CONTROL);
   bool input_headlights = digitalRead(HEADLIGHTS_BUTTON);
   bool input_horn = digitalRead(HORN_BUTTON);
   
-  // bool input_brake = digitalRead(BRAKE_SWITCH);
-  bool input_brake = analogRead(BRAKE_SWITCH) > 512;
+  bool input_brake = digitalRead(BRAKE_SWITCH);
+  // bool input_brake = analogRead(BRAKE_SWITCH) > 512;
 
   bool input_reverse = digitalRead(REVERSE_SWITCH);
 
