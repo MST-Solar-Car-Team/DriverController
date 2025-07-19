@@ -20,7 +20,7 @@ DueTimer driveTimer =
 DueTimer powerTimer =
     Timer.getAvailable().attachInterrupt([]() { send_power_message(); }).start(100000);
 DueTimer flasherTimer =
-    Timer.getAvailable().attachInterrupt([]() { car_state.toggle_flasher(); }).start(500000);
+    Timer.getAvailable().attachInterrupt([]() { car_state.toggle_flasher();}).start(500000);
 
 void setup() {
   // setup the CAN bus interface

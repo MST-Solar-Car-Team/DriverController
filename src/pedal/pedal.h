@@ -9,5 +9,6 @@
 // Variables
 #define ACC_PEDAL_MIN 545
 #define ACC_PEDAL_FAULT 475
+#define DEADZONE 0.95
 
 float get_pedal_value();

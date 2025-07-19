@@ -4,7 +4,7 @@
 
 #pragma once
 
-#define DEBOUNCE_TIME 500 // how many milliseconds
+#define DEBOUNCE_TIME 500  // how many milliseconds
 
 struct buttonStates {
   bool left_blinker = false;    // true -> flash left blinker
@@ -12,6 +12,7 @@ struct buttonStates {
   bool cruise_control = false;  // true -> enable cruise control
   bool headlights = false;      // true -> turn on headlights
   bool horn = false;            // true -> honk horn
+  bool reverse = false;         // true -> sets car to go in
 };
 
 class carState {

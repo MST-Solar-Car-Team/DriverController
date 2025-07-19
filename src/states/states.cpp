@@ -1,6 +1,7 @@
 #include "states.h"
 
 #include "../pins/pins.h"
+#include "../telemetry/serial_log.h"
 
 bool carState::has_fault() { return this->BPSfault || this->pedalFault || this->braking; }
 
@@ -14,21 +15,32 @@ void carState::readButtons() {
   static bool prev_right = true;
   static bool prev_cruise = true;
   static bool prev_headlights = true;
+  static bool prev_reverse = true;
 
+  static unsigned long last_update = 0;
   static unsigned long last_left = 0;
   static unsigned long last_right = 0;
   static unsigned long last_cruise = 0;
   static unsigned long last_headlights = 0;
+  static unsigned long last_reverse = 0;
 
-  const unsigned long debounce_time = DEBOUNCE_TIME; // 0.5 seconds
-  
-  
+  const unsigned long debounce_time = DEBOUNCE_TIME;  // 0.5 seconds
+
   bool input_left = digitalRead(LEFT_TURN_SIGNAL_BUTTON);
+  // bool input_left = analogRead(LEFT_TURN_SIGNAL_BUTTON) > 512;
+
   bool input_right = digitalRead(RIGHT_TURN_SIGNAL_BUTTON);
+  // bool input_right = analogRead(RIGHT_TURN_SIGNAL_BUTTON) > 512;
+
+
   bool input_cruise = digitalRead(CRUISE_CONTROL);
   bool input_headlights = digitalRead(HEADLIGHTS_BUTTON);
   bool input_horn = digitalRead(HORN_BUTTON);
+  
   bool input_brake = digitalRead(BRAKE_SWITCH);
+  // bool input_brake = analogRead(BRAKE_SWITCH) > 512;
+
+  bool input_reverse = digitalRead(REVERSE_SWITCH);
 
   unsigned long now = millis();
 
@@ -37,7 +49,7 @@ void carState::readButtons() {
     this->buttons.left_blinker = !this->buttons.left_blinker;
     last_left = now;
     if (this->buttons.left_blinker) {
-      this->flasher_state = true; // for more responsiveness
+      this->flasher_state = true;  // for more responsiveness
     }
   }
   prev_left = input_left;
@@ -65,22 +77,33 @@ void carState::readButtons() {
 
   this->buttons.horn = (input_horn == LOW);
 
+  // if (!input_reverse && prev_cruise && (now - last_reverse > debounce_time)) {
+    // this->buttons.reverse = !this->buttons.reverse;
+    // last_reverse = now;
+  // }
+  // prev_reverse = input_reverse;
+  this->buttons.reverse = input_reverse;
+
   // perform actions
 
   if (this->buttons.left_blinker && this->flasher_state) {
     digitalWrite(BLINKER_BACK_LEFT, HIGH);
     digitalWrite(BLINKER_FRONT_LEFT, HIGH);
+    digitalWrite(LEFT_INTERNAL_SIGNAL, HIGH);
   } else {
     digitalWrite(BLINKER_BACK_LEFT, LOW);
     digitalWrite(BLINKER_FRONT_LEFT, LOW);
+    digitalWrite(LEFT_INTERNAL_SIGNAL, LOW);
   }
 
   if (this->buttons.right_blinker && this->flasher_state) {
     digitalWrite(BLINKER_BACK_RIGHT, HIGH);
     digitalWrite(BLINKER_FRONT_RIGHT, HIGH);
+    digitalWrite(RIGHT_INTERNAL_SIGNAL, HIGH);
   } else {
     digitalWrite(BLINKER_BACK_RIGHT, LOW);
     digitalWrite(BLINKER_FRONT_RIGHT, LOW);
+    digitalWrite(RIGHT_INTERNAL_SIGNAL, LOW);
   }
 
   if (this->buttons.headlights) {
@@ -98,5 +121,16 @@ void carState::readButtons() {
     digitalWrite(BRAKE_RIGHT, LOW);
     this->braking = false;
   }
+
+  if ((now - last_update) > 100) {
+    LightsPacket packet =
+        LightsPacket(this->buttons.headlights, this->buttons.right_blinker && flasher_state,
+                     this->buttons.left_blinker && flasher_state, this->braking, this->reversed);
+    packet.send_bytes();
+    last_update = now;
+  }
+
   // TODO: horn
+
+  this->reversed = this->buttons.reverse;
 }
